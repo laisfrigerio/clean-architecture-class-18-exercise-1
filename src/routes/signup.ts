@@ -1,12 +1,11 @@
 import crypto from "crypto";
 import pgp from "pg-promise";
 import express from "express";
-import { validateCpf } from "./validate-cpf";
+import { validateCpf } from "../validate-cpf";
 
-const app = express();
-app.use(express.json());
+const router = express.Router();
 
-app.post("/signup", async function (req, res) {
+router.post("/signup", async function (req, res) {
   const input = req.body;
   const connection = pgp()("postgres://postgres:123456@localhost:5432/app");
   try {
@@ -90,4 +89,4 @@ app.post("/signup", async function (req, res) {
   }
 });
 
-app.listen(3000);
+export default router;
